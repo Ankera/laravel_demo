@@ -2,12 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/child', function () {
-    return view('view', [
-        'name' => 'Tom',
-        'json' => ['name' => 'Tom', 'age' => 12, 'city' => 'beijing'],
-        'records' => ''
-    ]);
+//Route::get('/child', function () {
+//    return view('view', [
+//        'name' => 'Tom',
+//        'json' => ['name' => 'Tom', 'age' => 12, 'city' => 'beijing'],
+//        'records' => ''
+//    ]);
+//});
+
+Route::get('/login/page', function () {
+    return view('login.login');
+});
+Route::get('/register/page', function () {
+    return view('login.register');
 });
 
 Route::get('/welcome', function () {

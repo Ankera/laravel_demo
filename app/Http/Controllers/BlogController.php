@@ -13,7 +13,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return '添加博客页面';
+//        return '添加博客页面';
+        return view('blog.create');
     }
 
     /**
@@ -31,7 +32,8 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-        return '查看一条博客22'.$id;
+//        return '查看一条博客22'.$id;
+        return view('blog.show');
     }
 
     /**
@@ -40,7 +42,8 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
-        return '编辑博客'.$id;
+//        return '编辑博客'.$id;
+        return view('blog.edit');
     }
 
     /**

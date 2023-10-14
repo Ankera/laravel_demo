@@ -5,6 +5,8 @@
 https://learnku.com/docs/laravel/8.x
 
 https://www.bilibili.com/video/BV1wB4y1P7hm?p=1&vd_source=0b9abcde1e0c06aa453d51487fc56291
+
+https://gitee.com/mirrors/markdown-css
 ```
 
 #### 启动项目

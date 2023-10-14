@@ -8,6 +8,6 @@ class IndexController extends Controller
 {
     // 博客首页
     public function index(){
-        return '博客首页';
+        return view('index.index');
     }
 }

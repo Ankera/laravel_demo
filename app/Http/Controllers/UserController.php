@@ -11,7 +11,8 @@ class UserController extends Controller
      */
     public function infoPage()
     {
-        return '个人中心 - 修改个人信息 - 页面';
+//        return '个人中心 - 修改个人信息 - 页面';
+        return view('user.info');
     }
 
     /**
@@ -27,7 +28,8 @@ class UserController extends Controller
      */
     public function avatarPage(Request $request)
     {
-        return '个人中心 - 修改个人头像 - 页面';
+//        return '个人中心 - 修改个人头像 - 页面';
+        return view('user.avatar');
     }
 
     /**
@@ -43,7 +45,8 @@ class UserController extends Controller
      * @return string
      */
     public function blog(){
-        return ' 我的所有博客';
+//        return ' 我的所有博客';
+        return  view('user.blog');
     }
 
 }
