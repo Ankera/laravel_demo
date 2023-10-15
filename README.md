@@ -34,3 +34,22 @@ php artisan make:controller ShowProfile --invokable
 Laravel 的资源路由通过单行代码即可将典型的「CURD (增删改查)」路由分配给控制器
 php artisan make:controller PhotoController --resource
 ```
+
+##### 登录注册
+```text
+composer require laravel/jetstream
+
+php artisan jetstream:install livewire
+
+npm install
+```
+
+##### 数据迁移
+```text
+php artisan migrate
+```
+
+##### 下载语言包
+```text
+composer require caouecs/laravel-lang:~3.0
+```

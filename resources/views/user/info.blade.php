@@ -24,19 +24,23 @@
                         <form class="col-md-6 offset-3">
                             <div class="form-group">
                                 <label for="exampleInputName">用户名</label>
-                                <input type="email" value="Tom" placeholder="请填写用户名"
+                                <input type="text"
+                                       placeholder="请填写用户名"
                                        class="form-control form-control-sm"
                                        id="exampleInputName"
                                        aria-describedby="emailHelp"
+                                       value="{{isset(auth() -> user() -> name) ? auth() -> user() -> name : ''}}"
                                 >
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputEmail"></label>
-                                <input type="email" value="121@qq.com" placeholder="请填写邮箱"
+                                <input type="email"
+                                       placeholder="请填写邮箱"
                                        class="form-control form-control-sm"
                                        id="exampleInputEmail"
                                        aria-describedby="emailHelp"
+                                       value="{{isset(auth() -> user() -> email) ? auth() -> user() -> email : ''}}"
                                 >
                             </div>
 

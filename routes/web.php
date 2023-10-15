@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Route;
 //    ]);
 //});
 
-Route::get('/login/page', function () {
-    return view('login.login');
-});
-Route::get('/register/page', function () {
-    return view('login.register');
-});
-
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -133,3 +126,13 @@ Route::post('/blog/{id}/comment', \App\Http\Controllers\CommentController::class
 //Route::get('user/{id}/profile', function ($id) {
 //    return route('user.profile', $id.$id);
 //})->name('user.profile');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
