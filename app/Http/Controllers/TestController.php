@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use function Laravel\Prompts\table;
 
 class TestController extends Controller
@@ -34,11 +35,14 @@ class TestController extends Controller
 //        echo asset('css/index.css');
 //        echo '<hr />';
 //        echo public_path('css/index.css');
-        return response() -> streamDownload(function () {
-            echo 'hello world';
-        }, 'hello.txt');
+//        return response() -> streamDownload(function () {
+//            echo 'hello world';
+//        }, 'hello.txt');
 //        return response('hello world', 200)
 //            -> header('Content-Type', 'text/plain')
 //            -> header('Content-Name-z', '121');
+//        return Storage::put('test/file.txt', 'hello text');
+//        return Storage::disk('public') -> put('file.txt', 'hello text');
+        return 'hello test';
     }
 }

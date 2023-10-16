@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
@@ -76,9 +77,34 @@ class UserController extends Controller
     /**
      * 个人中心 - 修改个人头像 - 更新数据
      */
-    public function avatarUpdate(string $id)
+    public function avatarUpdate(Request $request)
     {
-        return '个人中心 - 修改个人头像 - 更新数据';
+        $file = $request -> file('avatar');
+        if(empty($file)){
+            return  back() -> withErrors('请上传头像');
+        }
+        $path = $file -> store('avatar', 'public');
+        $uid = auth() -> id();
+
+        // 原有头像
+        $oldAvatar = auth() -> user() -> avatar;
+
+        if($uid){
+            $res = DB::table('users')
+                -> where('id', $uid)
+                -> update(['avatar' => $path]);
+            if($res){
+
+                /**
+                 * 数据库更新之后，删除原有的头像
+                 */
+                Storage::disk('public') -> delete($oldAvatar);
+
+                return  back() -> with(['success' => '头像更新成功']);
+            }
+            return  back() -> withErrors('未做更改');
+        }
+        return  back() -> withErrors('服务器异常，请联系管理员');
     }
 
     /**

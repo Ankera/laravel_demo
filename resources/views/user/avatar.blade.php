@@ -21,12 +21,21 @@
                         修改个人信息
                     </div>
                     <div class="card-body">
-                        <form class="col-md-6 offset-3">
+                        @include('common.error')
+                        @include('common.success')
+                        <form
+                            method="POST"
+                            action="{{ route('user.avatar.update') }}"
+                            enctype="multipart/form-data"
+                            class="col-md-6 offset-3">
+                            @csrf
+                            @method('put')
                             <div class="form-group">
                                 <label for="exampleInputFile1">请选择头像</label>
                                 <input type="file" placeholder="请填写用户名"
                                        class="form-control-file"
                                        id="exampleInputFile1"
+                                       name="avatar"
                                        aria-describedby="emailHelp"
                                 >
                             </div>

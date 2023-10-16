@@ -75,3 +75,14 @@ return response() -> streamDownload(function () {
     echo 'hello world';
 }, 'hello.txt');
 ```
+
+##### 文件系统创建符号链接
+```text
+php artisan storage:link;
+```
+
+##### 数据迁移
+```text
+php artisan make:migration add_avatar_to_users --table=users
+不要在数据库直接执行命令，执行迁移文件，方便后续数据库迁移，切记、切记、切记
+```
