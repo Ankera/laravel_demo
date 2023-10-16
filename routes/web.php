@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 //        'records' => ''
 //    ]);
 //});
+Route::get('/test', \App\Http\Controllers\TestController::class);
 
 Route::get('/welcome', function () {
     return view('welcome');

@@ -53,3 +53,25 @@ php artisan migrate
 ```text
 composer require caouecs/laravel-lang:~3.0
 ```
+
+##### form 表单保留以前数据
+```php
+old('name');
+```
+
+#### 路径
+```php
+// URL 地址
+asset('css/index.css'); // http://127.0.0.1:8000/css/index.css
+
+// 文件在服务器上的路径
+public_path('css/index.css');  // /Users/xxx/Documents/php/laravel_demo/public/css/index.css
+```
+
+##### 响应流下载
+```php
+// 下载一个 hello.txt 的文件
+return response() -> streamDownload(function () {
+    echo 'hello world';
+}, 'hello.txt');
+```

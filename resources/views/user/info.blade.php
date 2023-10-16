@@ -21,10 +21,16 @@
                         修改个人信息
                     </div>
                     <div class="card-body">
-                        <form class="col-md-6 offset-3">
+                        @include('common.error')
+                        @include('common.success')
+                        <form method="post" action="{{ route('user.info.update') }}" class="col-md-6 offset-3">
+                            @csrf
+                            @method('put')
+{{--                            <input type="hidden" name="_method" value="put">--}}
                             <div class="form-group">
                                 <label for="exampleInputName">用户名</label>
                                 <input type="text"
+                                       name="name"
                                        placeholder="请填写用户名"
                                        class="form-control form-control-sm"
                                        id="exampleInputName"
@@ -36,6 +42,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail"></label>
                                 <input type="email"
+                                       name="email"
                                        placeholder="请填写邮箱"
                                        class="form-control form-control-sm"
                                        id="exampleInputEmail"
