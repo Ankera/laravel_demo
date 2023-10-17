@@ -45,9 +45,19 @@ class TestController extends Controller
 //        return Storage::put('test/file.txt', 'hello text');
 //        return Storage::disk('public') -> put('file.txt', 'hello text');
 //        categories();
-        Cache::increment('number');
-        $value = Cache::get('number', 'default');
-        dd($value);
+//        Cache::increment('number');
+//        $value = Cache::get('number', 'default');
+//        dd($value);
 //        return 'hello test';
+//        $value = Cache::get('users', function (){
+////            return 'hello';
+//            return DB::table('users') -> pluck('name', 'id');
+//        });
+//        $value = Cache::rememberForever('users', function () {
+//            return 'rememberForever';
+//        });
+//        $value = Cache::get('users');
+        Cache::forget('rememberForever');
+        dd('$value = '.now());
     }
 }
