@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use function Laravel\Prompts\table;
@@ -43,6 +44,10 @@ class TestController extends Controller
 //            -> header('Content-Name-z', '121');
 //        return Storage::put('test/file.txt', 'hello text');
 //        return Storage::disk('public') -> put('file.txt', 'hello text');
-        return 'hello test';
+//        categories();
+        Cache::increment('number');
+        $value = Cache::get('number', 'default');
+        dd($value);
+//        return 'hello test';
     }
 }
