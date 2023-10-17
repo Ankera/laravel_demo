@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    /**
+     * 该控制类使用 auth 中间件
+     * 但是排除 show 方法
+     */
+    public function __construct(){
+        $this -> middleware('auth') -> except('show');
+    }
 
     /**
      * GET

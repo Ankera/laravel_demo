@@ -9,38 +9,87 @@ use Illuminate\Support\Facades\Route;
 //        'records' => ''
 //    ]);
 //});
-Route::get('/test', \App\Http\Controllers\TestController::class);
+//Route::domain('127.0.0.1') -> group(function () {
+//    Route::get('domain', function () {
+//        return 'hello world';
+//    });
+//});
+//Route::prefix('admin') -> group(function () {
+//    Route::get('users', function (){
+//        return 'admin users';
+//    });
+//});
+// 路由组中间
+//Route::middleware('check.age:TOM') -> group(function () {
+//    Route::get('checkAge', function () {
+//        return '年龄符号';
+//    });
+//});
+//// 独立路由使用中间件
+//Route::get('checkAge2', function () {
+//    return '年龄符号22';
+//})
+//    -> middleware('check.age');
+
+Route::any('/test', \App\Http\Controllers\TestController::class);
 
 Route::get('/welcome', function () {
     return view('welcome');
 });
 
+
 // 首页
 Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
-
-// 补充路由, 改变博客状态，发布与不发布
-Route::patch('/blog/{id}', [\App\Http\Controllers\BlogController::class, 'status'])->name('blog.status');
 
 // 博客资源路由
 Route::resource('blog', \App\Http\Controllers\BlogController::class)->except(['index']);
 
-// 个人中心 - 修改个人信息 - 页面
-Route::get('/user', [\App\Http\Controllers\UserController::class, 'infoPage'])->name('user.info');
+/**
+ * 需要登录的中间件
+ */
+Route::middleware('auth') -> group(function () {
+    /**
+     * 博客相关的页面
+     */
+    Route::prefix('blog')
+        -> name('blog.')
+        -> group(function (){
+            // 补充路由, 改变博客状态，发布与不发布
+            Route::patch('/{id}', [\App\Http\Controllers\BlogController::class, 'status'])->name('status');
 
-// 个人中心 - 修改个人信息 - 更新数据
-Route::put('/user', [\App\Http\Controllers\UserController::class, 'infoUpdate'])->name('user.info.update');
+            // 评论路由
+            Route::post('/{id}/comment', \App\Http\Controllers\CommentController::class)->name('comment');
+        });
 
-// 个人中心 - 修改个人头像 - 页面
-Route::get('/user/avatar', [\App\Http\Controllers\UserController::class, 'avatarPage'])->name('user.avatar');
 
-// 个人中心 - 修改个人头像 - 更新数据
-Route::put('/user/avatar', [\App\Http\Controllers\UserController::class, 'avatarUpdate'])->name('user.avatar.update');
+    /**
+     * 个人中心相关页面
+     * prefix 新增前缀
+     * name 新增命名前缀
+     */
+    Route::prefix('user')
+        -> name('user.')
+        -> group(function () {
+            // 个人中心 - 修改个人信息 - 页面
+            Route::get('/', [\App\Http\Controllers\UserController::class, 'infoPage'])->name('info');
 
-// 我的所有博客
-Route::get('/user/blog', [\App\Http\Controllers\UserController::class, 'blog'])->name('user.blog');
+            // 个人中心 - 修改个人信息 - 更新数据
+            Route::put('/', [\App\Http\Controllers\UserController::class, 'infoUpdate'])->name('info.update');
 
-// 评论路由
-Route::post('/blog/{id}/comment', \App\Http\Controllers\CommentController::class)->name('blog.comment');
+            // 个人中心 - 修改个人头像 - 页面
+            Route::get('/avatar', [\App\Http\Controllers\UserController::class, 'avatarPage'])->name('avatar');
+
+            // 个人中心 - 修改个人头像 - 更新数据
+            Route::put('/avatar', [\App\Http\Controllers\UserController::class, 'avatarUpdate'])->name('avatar.update');
+
+            // 我的所有博客
+            Route::get('/blog', [\App\Http\Controllers\UserController::class, 'blog'])->name('blog');
+    });
+});
+
+
+
+
 
 // ====================== 路由 ======================
 // 博客首页

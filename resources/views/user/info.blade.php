@@ -32,11 +32,14 @@
                                 <input type="text"
                                        name="name"
                                        placeholder="请填写用户名"
-                                       class="form-control form-control-sm"
+                                       class="@error('name') is-invalid @enderror form-control form-control-sm"
                                        id="exampleInputName"
                                        aria-describedby="emailHelp"
                                        value="{{isset(auth() -> user() -> name) ? auth() -> user() -> name : ''}}"
                                 >
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
@@ -44,11 +47,14 @@
                                 <input type="email"
                                        name="email"
                                        placeholder="请填写邮箱"
-                                       class="form-control form-control-sm"
+                                       class="@error('email') is-invalid @enderror form-control form-control-sm"
                                        id="exampleInputEmail"
                                        aria-describedby="emailHelp"
                                        value="{{isset(auth() -> user() -> email) ? auth() -> user() -> email : ''}}"
                                 >
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-sm w-100 mt-4 bg-blue text-white">修改</button>

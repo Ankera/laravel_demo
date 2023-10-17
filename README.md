@@ -86,3 +86,41 @@ php artisan storage:link;
 php artisan make:migration add_avatar_to_users --table=users
 不要在数据库直接执行命令，执行迁移文件，方便后续数据库迁移，切记、切记、切记
 ```
+
+##### 创建验证器-生成校验文件
+```text
+php artisan make:request UserRequest
+
+执行成功之后，在 app/Http 目录下 生成 Requests/UserRequest.php 文件
+```
+
+##### 创建一个年龄的中间
+```text
+ php artisan make:middleware checkAge
+```
+
+```php
+ public function handle(Request $request, Closure $next, $name): Response
+{
+    echo '<h1>'.'这是参数'.$name.'</h1>';
+    if($request -> age <= 200){
+        return  redirect('/');
+    }
+    return $next($request);
+}
+
+// 在 routes.php 中间使用
+// 路由组中间
+// 多个路由中间件 middleware(['one', 'two'])
+// 参数是 `:参数`
+Route::middleware('check.age:TOM') -> group(function () {
+    Route::get('checkAge', function () {
+        return '年龄符号';
+    });
+});
+// 独立路由使用中间件
+Route::get('checkAge2', function () {
+    return '年龄符号22';
+})
+    -> middleware('check.age');
+```

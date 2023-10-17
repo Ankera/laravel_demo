@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -21,8 +21,17 @@ class UserController extends Controller
     /**
      * 个人中心 - 修改个人信息 - 更新数据
      */
-    public function infoUpdate(Request $request)
+    public function infoUpdate(UserRequest $request)
     {
+//        $validateData = $request -> validate([
+//            'name' => "required|min:4|max:32",
+//            'email' => 'required|email',
+//        ], [
+//            'name.required' => '必须输入用户名',
+//            'name.min' => '最小长度为4',
+//            'name.max' => '最大长度为32'
+//        ]);
+
         $name = $request->input('name');
         $email = $request->input('email');
         $uid = auth() -> id();
@@ -94,7 +103,6 @@ class UserController extends Controller
                 -> where('id', $uid)
                 -> update(['avatar' => $path]);
             if($res){
-
                 /**
                  * 数据库更新之后，删除原有的头像
                  */
