@@ -12,6 +12,7 @@ class TestController extends Controller
 {
     /**
      * Handle the incoming request.
+     * test
      */
     public function __invoke(Request $request)
     {
@@ -57,7 +58,8 @@ class TestController extends Controller
 //            return 'rememberForever';
 //        });
 //        $value = Cache::get('users');
-        Cache::forget('rememberForever');
-        dd('$value = '.now());
+//        Cache::forget('rememberForever');
+//        dd('$value = '.now());
+        return view('test');
     }
 }
