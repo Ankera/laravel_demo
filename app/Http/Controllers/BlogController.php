@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogRequest;
+use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -28,9 +31,52 @@ class BlogController extends Controller
      * POST
      * 执行博客添加
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        return '执行博客添加';
+        $all = $request -> all();
+        // 方式1：使用DB添加
+//        $res = DB::table('blogs') -> insert([
+//            'user_id' => auth()->id(),
+//            'title' => $request -> input('title'),
+//            'content' => $request -> input('content'),
+//            'category_id' => $request -> input('category_id'),
+//        ]);
+
+        // 方式2：使用模型对象来创建
+//        $blog = new Blog();
+//        $blog -> user_id = auth() -> id();
+//        $blog -> title = $request -> input('title');
+//        $blog -> content = $request -> input('content');
+//        $blog -> category_id = $request -> input('category_id');
+//        $res = $blog -> save();
+
+        // 方式3： 批量模型添加, 必须在模型类设置 $fillable
+//        $res = Blog::create([
+//            'user_id' => auth()->id(),
+//            'title' => $request -> input('title'),
+//            'content' => $request -> input('content'),
+//            'category_id' => $request -> input('category_id'),
+//        ]);
+
+        // 方式4： 用已存在的模型对象，使用fill快速添加
+//        $blog = new Blog();
+//        $blog -> fill([
+//            'user_id' => auth()->id(),
+//            'title' => $request -> input('title'),
+//            'content' => $request -> input('content'),
+//            'category_id' => $request -> input('category_id'),
+//        ]);
+//        $res = $blog -> save();
+
+        // 方式5： 使用 $request -> all() 添加
+//        array_merge($request->except(['_token']), ['user_id' => auth()->id()]);
+        $request->offsetSet('user_id', auth() -> id());
+        $res = Blog::create($request->except(['_token']));
+
+        if($res) {
+            return back() -> with(['success' => '添加成功']);
+        }
+        return back() -> withErrors('添加失败') -> withInput();
     }
 
     /**

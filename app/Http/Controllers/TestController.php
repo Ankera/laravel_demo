@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Flight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -60,6 +61,24 @@ class TestController extends Controller
 //        $value = Cache::get('users');
 //        Cache::forget('rememberForever');
 //        dd('$value = '.now());
-        return view('test');
+//        Flight::all();
+
+        //
+//        $flight = new Flight();
+//        $flight->fill(['name' => 'Flight 22']);
+//        $flight -> name = '北京';
+//        $res = $flight -> save();
+//        dd($flight);
+//        $flight = Flight::find(1);
+//        $flight->name = "上海";
+//        $flight->save();
+//        Flight::where('name', '北京') -> update('name', '北京北京');
+//        $res = Flight::all();
+//        dd($res);
+//       $res = Flight::create(['name' => '3333']);
+//        $res = Flight::insert([]);
+//        return $flight;
+//        $flight = Flight::find(1);
+//        $flight -> delete();
     }
 }

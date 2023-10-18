@@ -206,3 +206,8 @@ public function run(): void
 执行，启用 composer
 composer dump-autoload
 ```
+
+##### 创建数据模型，并创建迁移
+```text
+php artisan make:model Flight -m;
+```
