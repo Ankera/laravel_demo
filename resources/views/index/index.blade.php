@@ -47,7 +47,10 @@
                             <hr>
                         @endforeach
 
-                        {{ $blogs -> links() }}
+{{--                        {{ $blogs -> appends(['keyword' => request() -> query('keyword')]) -> links() }}--}}
+                            {{ $blogs -> withQueryString() -> links() }}
+
+
 {{--                        <nav class="d-flex justify-content-center mt-4">--}}
 {{--                            <ul class="pagination">--}}
 {{--                                <li class="page-item disabled">--}}
