@@ -93,19 +93,33 @@ class BlogController extends Controller
      * GET
      * 编辑博客
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
 //        return '编辑博客'.$id;
-        return view('blog.edit');
+        return view('blog.edit', ['blog' => $blog]);
     }
 
     /**
      * PUT/PATCH
      * 执行编辑博客
      */
-    public function update(Request $request, string $id)
+    public function update(BlogRequest $request, Blog $blog)
     {
-        return '执行编辑博客'.$id;
+//        dd($blog);
+        // 方式1：
+//        $blog -> title =  $request -> input('title');
+//        $blog -> content =  $request -> input('content');
+//        $blog -> category_id =  $request -> input('category_id');
+//        $res = $blog -> save();
+
+        // 方式2
+        $blog -> fill($request -> except(['_token', '_method']));
+        $res = $blog -> save();
+
+        if($res) {
+            return back() -> with(['success' => '编辑成功']);
+        }
+        return back() -> withErrors('编辑失败') -> withInput();
     }
 
     /**
