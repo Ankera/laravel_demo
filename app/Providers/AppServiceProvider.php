@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // 使用 Bootstrap 的分页器
+        Paginator::useBootstrap();
+
+        Paginator::defaultView('vendor.pagination.my-page');
+
+        Paginator::defaultSimpleView('vendor.pagination.my-page');
     }
 }
