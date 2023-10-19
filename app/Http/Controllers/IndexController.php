@@ -16,6 +16,7 @@ class IndexController extends Controller
 //        dd($keyword);
 
         $blogs = Blog::when($keyword, function ($query) use ($keyword) {
+            // 分组进行查询
            $query->where(function ($query) use($keyword) {
                $query -> where('title', 'like', "%{$keyword}%")
                    -> orWhere('content', 'like', "%{$keyword}%");

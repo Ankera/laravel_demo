@@ -83,10 +83,12 @@ class BlogController extends Controller
      * GET
      * 查看一条博客
      */
-    public function show(string $id)
+    public function show(Blog $blog)
     {
-//        return '查看一条博客22'.$id;
-        return view('blog.show');
+        $blog->timestamps = false;
+        $blog->increment('view');
+        $blog->timestamps = true;
+        return view('blog.show', ['blog' => $blog]);
     }
 
     /**

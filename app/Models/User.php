@@ -58,4 +58,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * 用户一对多个博客
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function blogs(){
+        return $this -> hasMany(Blog::class, 'user_id', 'id');
+    }
 }

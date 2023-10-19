@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Flight;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -80,5 +82,13 @@ class TestController extends Controller
 //        return $flight;
 //        $flight = Flight::find(1);
 //        $flight -> delete();
+//        $user = User::find(4);
+//        $blog = $user->blogs()->where('status', 1)-> get();
+//        $user = User::doesntHave('blogs') -> get();
+//        $users = User::with('blogs') -> get();
+//        dd($users);
+        $user = User::find(1);
+        $blogs = new Blog(['title' => 'bb', 'content' => 'bb', 'category_id' => 1]);
+        $user -> blogs() -> save($blogs);
     }
 }
