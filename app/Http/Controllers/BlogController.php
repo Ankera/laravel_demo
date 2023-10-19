@@ -83,8 +83,13 @@ class BlogController extends Controller
      * GET
      * 查看一条博客
      */
-    public function show(Blog $blog)
+//    public function show(Blog $blog)
+    public function show($id)
     {
+        $blog = Blog::with('comments.user')
+            -> where('id', $id)
+            -> first();
+
         $blog->timestamps = false;
         $blog->increment('view');
         $blog->timestamps = true;

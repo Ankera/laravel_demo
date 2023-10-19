@@ -26,7 +26,7 @@
                             <div class="article-body">
                                 <div>
                                     <span class="article-author">
-{{--                                        {{  }}--}}
+                                        {{ $blog -> user -> name }}
                                     </span>
                                     <span class="article-time">
                                         {{-- 时间是该类的方法 nesbog/Carbon，使用该类中的函数 diffForHumans  --}}

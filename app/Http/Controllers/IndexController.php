@@ -25,6 +25,7 @@ class IndexController extends Controller
             ->when($category_id, function ($query) use($category_id) {
                 $query -> where('category_id', $category_id);
             })
+            ->with('user:id,name')
             ->where('status', 1)
             ->orderBy('updated_at', 'desc')
             -> paginate(2);
