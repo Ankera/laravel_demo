@@ -23,3 +23,10 @@ if(!function_exists('categories')){
     }
 }
 
+if(!function_exists('avatar')){
+    function avatar($avatar)
+    {
+        $avatar_url = $avatar ? asset('storage/'.$avatar) : asset('img/blog-pkq-logo.webp');
+        return $avatar_url;
+    }
+}

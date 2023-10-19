@@ -87,8 +87,16 @@ class TestController extends Controller
 //        $user = User::doesntHave('blogs') -> get();
 //        $users = User::with('blogs') -> get();
 //        dd($users);
-        $user = User::find(1);
-        $blogs = new Blog(['title' => 'bb', 'content' => 'bb', 'category_id' => 1]);
-        $user -> blogs() -> save($blogs);
+//        $user = User::find(1);
+//        $blogs = new Blog(['title' => 'bb', 'content' => 'bb', 'category_id' => 1]);
+//        $user -> blogs() -> save($blogs);
+        $blogs = Blog::all();
+        $retDat = [
+            'code' => 200,
+            'message' => 'success',
+            'data' => $blogs,
+        ];
+//        return response() -> json($retDat);
+        return response() -> api('success', 200, $blogs);
     }
 }

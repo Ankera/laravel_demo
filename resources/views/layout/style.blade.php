@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-toast-plugin/1.3.2/jquery.toast.css">
 <link rel="stylesheet" href="{{ asset('css/common.css')  }}">
 <style>
 
