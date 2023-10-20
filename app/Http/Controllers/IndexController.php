@@ -28,7 +28,7 @@ class IndexController extends Controller
             ->with('user:id,name')
             ->where('status', 1)
             ->orderBy('updated_at', 'desc')
-            -> paginate(2);
+            -> paginate(5);
         return view('index.index',['blogs' => $blogs]);
     }
 }

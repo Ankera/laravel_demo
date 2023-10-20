@@ -55,7 +55,7 @@ Route::middleware('auth') -> group(function () {
         -> name('blog.')
         -> group(function (){
             // 补充路由, 改变博客状态，发布与不发布
-            Route::patch('/{id}', [\App\Http\Controllers\BlogController::class, 'status'])->name('status');
+            Route::patch('/{blog}/status', [\App\Http\Controllers\BlogController::class, 'status'])->name('status');
 
             // 评论路由
             Route::post('/{blog}/comment', \App\Http\Controllers\CommentController::class)->name('comment');

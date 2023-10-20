@@ -120,8 +120,15 @@ class UserController extends Controller
      * @return string
      */
     public function blog(){
-//        return ' 我的所有博客';
-        return  view('user.blog');
+//        return ' 我的所有博客';paginate
+//        $blogs = auth() -> user() -> blogs() -> withCount('comments') -> get();
+        $blogs = auth()
+            -> user()
+            -> blogs()
+            -> withCount('comments')
+            -> orderBy('updated_at', 'desc')
+            -> paginate(5);
+        return  view('user.blog', ['blogs' => $blogs]);
     }
 
 }

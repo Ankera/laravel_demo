@@ -133,16 +133,29 @@ class BlogController extends Controller
      * DELETE
      * 删除博客
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        return '删除博客'.$id;
+        $res = $blog -> delete();
+        if($res) {
+            return response() -> api('删除成功', 200);
+        }
+        return response() -> api('删除失败');
     }
 
     /**
      * 改变博客状态
      * @param string $Id
      */
-    public function status(string $Id) {
-        return '改变博客状态';
+    public function status(Blog $blog) {
+
+        $blog -> status = $blog -> status === 1 ? 0 : 1;
+        $blog->timestamps = false;
+        $res = $blog -> save();
+        $blog->timestamps = true;
+        if($res) {
+            $msg = $blog -> status === 1 ? '发布成功' : '取消发布';
+            return response() -> api($msg, 200);
+        }
+        return response() -> api('修改失败');
     }
 }
