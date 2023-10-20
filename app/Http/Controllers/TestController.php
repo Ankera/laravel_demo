@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderShipped;
 use App\Models\Blog;
 use App\Models\Flight;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use function Laravel\Prompts\table;
 
@@ -90,13 +92,14 @@ class TestController extends Controller
 //        $user = User::find(1);
 //        $blogs = new Blog(['title' => 'bb', 'content' => 'bb', 'category_id' => 1]);
 //        $user -> blogs() -> save($blogs);
-        $blogs = Blog::all();
-        $retDat = [
-            'code' => 200,
-            'message' => 'success',
-            'data' => $blogs,
-        ];
-//        return response() -> json($retDat);
-        return response() -> api('success', 200, $blogs);
+//        $blogs = Blog::all();
+//        $retDat = [
+//            'code' => 200,
+//            'message' => 'success',
+//            'data' => $blogs,
+//        ];
+////        return response() -> json($retDat);
+//        return response() -> api('success', 200, $blogs);
+        Mail::to('15189120919@139.com') -> send(new OrderShipped());
     }
 }

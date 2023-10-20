@@ -212,4 +212,7 @@ composer dump-autoload
 php artisan make:model Flight -m;
 ```
 
-##### 
+##### 创建邮件发送
+```text
+php artisan make:mail OrderShipped
+```
