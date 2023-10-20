@@ -216,3 +216,8 @@ php artisan make:model Flight -m;
 ```text
 php artisan make:mail OrderShipped
 ```
+
+##### 消息队列
+```text
+php artisan queue:table
+```

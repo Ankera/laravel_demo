@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessPodcast;
 use App\Mail\OrderShipped;
 use App\Models\Blog;
 use App\Models\Flight;
@@ -100,6 +101,9 @@ class TestController extends Controller
 //        ];
 ////        return response() -> json($retDat);
 //        return response() -> api('success', 200, $blogs);
-        Mail::to('15189120919@139.com') -> send(new OrderShipped());
+//        Mail::to('15189120919@139.com') -> send(new OrderShipped());
+
+        ProcessPodcast::dispatch();
+        return 'hello test';
     }
 }

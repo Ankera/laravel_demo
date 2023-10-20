@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CommentEmail;
 use App\Mail\BlogComment;
 use App\Models\Blog;
 use Illuminate\Http\Request;
@@ -25,8 +26,8 @@ class CommentController extends Controller
                 'name' => auth() -> user() -> name,
                 'content' => $request -> input('content'),
             ];
-            // 通知有新的评论
-            Mail::to($blog -> user) -> send(new BlogComment($comment));
+           // 使用队列发送邮件
+            CommentEmail::dispatch($comment);
 
             return  response() -> api('评论成功', 200, $retData);
         }
